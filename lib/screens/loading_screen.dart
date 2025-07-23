@@ -31,7 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     });
 
     NetworkHelper networking = NetworkHelper(
-      'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$key',
+      'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$key&units=metric',
     );
 
     var weatherData = await networking.getData();
@@ -39,7 +39,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const LocationScreen()),
+      MaterialPageRoute(
+        builder: (context) => LocationScreen(locationweather: weatherData),
+      ),
     );
   }
 
