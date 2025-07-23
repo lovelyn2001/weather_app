@@ -68,7 +68,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 padding: EdgeInsets.only(left: 15.0),
                 child: Row(
                   children: <Widget>[
-                    Text('32°', style: tempTextStyle),
+                    Text('$temperature', style: tempTextStyle),
                     Text('☀️', style: conditionTextStyle),
                   ],
                 ),

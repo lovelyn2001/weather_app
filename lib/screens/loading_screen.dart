@@ -35,7 +35,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
 
     var weatherData = await networking.getData();
-    print(weatherData);
 
     Navigator.push(
       context,
