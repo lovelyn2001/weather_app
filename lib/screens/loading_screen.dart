@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/location.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:weather_app/services/networking.dart';
+import 'package:weather_app/screens/location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+const key = '785ec99797a3c2373669d88ddfcccc6e';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -15,10 +18,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   double? longitude;
   initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
-  Future<void> getLocation() async {
+  Future<void> getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
 
@@ -26,45 +29,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
       latitude = location.latitude;
       longitude = location.longitude;
     });
-    print('Latitude: ${location.latitude}, Longitude: ${location.longitude}');
-  }
 
-  void getWeatherData() async {
-    http.Response response = await http.get(
-      Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=785ec99797a3c2373669d88ddfcccc6e',
-      ),
+    NetworkHelper networking = NetworkHelper(
+      'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$key',
     );
-    if (response.statusCode == 200) {
-      String data = response.body;
-      double temperature;
-      int condition;
-      String cityName;
-      dynamic decodedData = jsonDecode(data);
 
-      temperature = decodedData['main']['temp'];
-      print('Temperature: $temperature');
-      condition = decodedData['weather'][0]['id'];
-      print('Condition: $condition');
-      cityName = decodedData['name'];
-      print('City Name: $cityName');
-    } else {
-      print(response.statusCode);
-    }
+    var weatherData = await networking.getData();
+    print(weatherData);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LocationScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            await getLocation();
-            getWeatherData();
-          },
-          child: Text('Get Location'),
-        ),
-      ),
-    );
+    return Scaffold(body: SpinKitFadingFour(color: Colors.white, size: 50.0));
   }
 }
