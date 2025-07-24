@@ -1,16 +1,45 @@
 # weather_app
 
-A new Flutter project.
+## Weather App
+
+A simple Flutter application to check the weather for any city.
+
+## Features
+
+- Search weather by city name
+- Beautiful background images
+- Clean and intuitive UI
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. **Clone the repository:**
+   ```
+   git clone https://github.com/lovelyn2001/weather_app.git
+   ```
+2. **Navigate to the project directory:**
+   ```
+   cd weather_app
+   ```
+3. **Install dependencies:**
+   ```
+   flutter pub get
+   ```
+4. **Run the app:**
+   ```
+   flutter run
+   ```
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `lib/screens/` - App screens
+- `lib/utilities/` - Constants and utility files
+- `images/` - App images
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Requirements
+
+- Flutter SDK
+- Dart
+
+## License
+
+MIT License
